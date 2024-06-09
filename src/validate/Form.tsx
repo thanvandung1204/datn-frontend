@@ -84,7 +84,7 @@ export const UserCheckoutSchema = Yup.object({
     .trim()
     .required('Số điện thoại không được để trống')
     .matches(/^(([+]{0,1}\d{2})|\d?)[\s-]?[0-9]{2}[\s-]?[0-9]{3}[\s-]?[0-9]{4}$/gm, 'Số điện thoại không hợp lệ'),
-  shippingLocation: Yup.string().required('Địa chỉ không được để trống'),
+  shippingLocation: Yup.string(),
   email: Yup.string()
     .trim()
     .email('Email không đúng định dạng')
@@ -123,7 +123,7 @@ export const InforFormSchema = Yup.object({
     .matches(/^(([+]{0,1}\d{2})|\d?)[\s-]?[0-9]{2}[\s-]?[0-9]{3}[\s-]?[0-9]{4}$/gm, 'Số điện thoại không hợp lệ'),
   account: Yup.string().trim().required('Tài khoản không được để trống'),
   gender: Yup.string().trim().required('Giới tính không được để trống'),
-  address: Yup.string().trim().required('Địa chỉ không được để trống')
+  address: Yup.string().trim()
 })
 
 export type InforForm = Yup.InferType<typeof InforFormSchema>
@@ -136,7 +136,7 @@ export const InforAddressSchema = Yup.object({
     .trim()
     .required('Số điện thoại không được để trống')
     .matches(/^(([+]{0,1}\d{2})|\d?)[\s-]?[0-9]{2}[\s-]?[0-9]{3}[\s-]?[0-9]{4}$/gm, 'Số điện thoại không hợp lệ'),
-  address: Yup.string().trim().required('Địa chỉ không được để trống'),
+  address: Yup.string().trim(),
   default: Yup.boolean(),
   geoLocation: Yup.object({
     lat: Yup.string(),
