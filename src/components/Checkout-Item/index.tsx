@@ -1,4 +1,4 @@
-import { CartLists } from '../../store/slices/types/cart.type'
+import { CartLists } from '../../store/types/cart.type'
 import { formatCurrency } from '../../utils/formatCurrency'
 import { v4 as uuidv4 } from 'uuid'
 

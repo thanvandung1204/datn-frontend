@@ -13,8 +13,8 @@ import { ClientSocket } from '../../socket'
 import { toast } from 'react-toastify'
 import { useCreateOrderMutation } from '../../store/slices/order'
 import { resetAllCart } from '../../store/slices/cart.slice'
-import { IOrderCheckout } from '../../store/slices/types/order.type'
 import { saveFormOrder } from '../../store/slices/order.slice'
+import { IOrderCheckout } from '../../store/types/order.type'
 
 interface Payload extends JwtPayload {
   noteOrder?: string
@@ -242,8 +242,9 @@ const PaymentResult = () => {
               } else {
                 dispatch(resetAllCart())
                 ClientSocket.sendNotificationToAdmin(
-                  `Đơn hàng "${res.order.orderNew._id.toUpperCase()}" vừa được tạo bởi khách hàng "${res.order.orderNew
-                    ?.inforOrderShipping?.name}" và đang chờ xác nhận.`
+                  `Đơn hàng "${res.order.orderNew._id.toUpperCase()}" vừa được tạo bởi khách hàng "${
+                    res.order.orderNew?.inforOrderShipping?.name
+                  }" và đang chờ xác nhận.`
                 )
                 ClientSocket.createOrder(res.order.orderNew.user)
                 localStorage.removeItem('storeNote')
