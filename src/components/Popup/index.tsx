@@ -47,8 +47,8 @@ const Popup = () => {
           <Slider {...settings}>
             <Link to='/'>
               <img
-                className='w-full'
-                src='https://tocotocotea.com/wp-content/uploads/2023/06/z4464528172206_690eb284c1df88d468d9aa6e470d4af7.jpg'
+                className='w-full h-full'
+                src='https://tocotocotea.com/wp-content/uploads/2024/03/Popup-5-ly-khong-lo-1.png'
                 alt=''
               />
             </Link>
