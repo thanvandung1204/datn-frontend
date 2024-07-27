@@ -92,11 +92,11 @@ const CardOrder = ({ product }: CardOrderProps) => {
               <div>
                 {dataSize && (
                   <Select
-                    defaultValue={item.size._id}
+                    defaultValue={item?.size?._id}
                     style={{ width: 120 }}
                     onChange={(value) => handleChange(value, item, index)}
                     className='text-sm text-[#adaeae] truncate'
-                    options={dataSize.map((item) => ({
+                    options={dataSize?.map((item) => ({
                       value: item._id,
                       label: item.name
                     }))}
