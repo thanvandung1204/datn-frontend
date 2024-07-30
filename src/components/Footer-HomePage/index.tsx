@@ -80,7 +80,7 @@ const FooterHomePage = () => {
             <div className='content'>
               <ul>
                 <li className='mb-2 text-sm'>
-                  <Link to='/'>Giới thiệu về MilkTea</Link>
+                  <Link to='/'>Giới thiệu về KingTea</Link>
                 </li>
                 <li className='mb-2 text-sm'>
                   <Link to='/'>Nhượng quyền</Link>
