@@ -7,6 +7,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { BiSolidUser } from 'react-icons/bi'
 import CheckoutItem from '../../components/Checkout-Item'
 import { ClientSocket } from '../../socket'
+import { IOrderCheckout } from '../../store/slices/types/order.type'
 import { IUserAddress } from '../../interfaces'
 import { IVoucher } from '../../interfaces/voucher.type'
 import ListStore from '../../interfaces/Map.type'
@@ -15,6 +16,7 @@ import { QuestionCircleOutlined } from '@ant-design/icons'
 import { UserCheckoutSchema } from '../../validate/Form'
 import YaSuoMap from '../../components/map/YaSuoMap'
 import YasuoGap from '../../components/map/YasuoGap'
+import { arrTotal } from '../../store/slices/types/cart.type'
 import { formatCurrency } from '../../utils/formatCurrency'
 import styles from './Checkout.module.scss'
 import { toast } from 'react-toastify'
@@ -26,8 +28,6 @@ import { v4 as uuidv4 } from 'uuid'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { MdOutlineMail } from 'react-icons/md'
 import { saveFormOrder } from '../../store/slices/order.slice'
-import { arrTotal } from '../../store/types/cart.type'
-import { IOrderCheckout } from '../../store/types/order.type'
 
 const content = (
   <div className='w-72'>
@@ -186,13 +186,11 @@ const Checkout = () => {
           name: data.name,
           email: data.email,
           phone: data.phone,
-          address: data.shippingLocation,
+          address: data.shippingLocation as string,
           noteShipping: data.shippingNote == '' ? ' ' : data.shippingNote
         }
       }
-
       dispatch(saveFormOrder(dataForm))
-
       if (Number(dataForm.total) <= 5000) {
         message.error('Đơn hàng phải lớn hơn 5 nghìn', 2)
       } else {
@@ -212,6 +210,17 @@ const Checkout = () => {
                 window.location.href = res.order.url
               }
             })
+            .catch((error: any) => {
+              if (error.status == 400 && error.data.error_s == 'blocked') {
+                console.log(error)
+                toast.error('Tài khoản của bạn bị khóa do spam quá nhiều')
+                setTimeout(() => {
+                  localStorage.clear()
+                  window.location.reload()
+                  navigate('/signin')
+                }, 1500)
+              }
+            })
         } else if (data.paymentMethod == 'vnpay') {
           vnpayPayment(dataForm)
             .unwrap()
@@ -219,7 +228,17 @@ const Checkout = () => {
               window.location.href = url
             })
             .catch((err) => {
+              console.log(err, 'errerr')
               toast.error(err.data.message)
+              if (err.status == 400 && err.data.error_s == 'blocked') {
+                console.log(err)
+                toast.error('Tài khoản của bạn bị khóa do spam quá nhiều')
+                setTimeout(() => {
+                  localStorage.clear()
+                  window.location.reload()
+                  navigate('/signin')
+                }, 1500)
+              }
             })
         }
       }
