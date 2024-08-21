@@ -84,7 +84,7 @@ const Checkout = () => {
   }, [dataCartCheckout.items, navigate])
 
   useEffect(() => {
-    errorCreate && toast.error((errorCreate as any)?.data.error)
+    errorCreate && toast.error((errorCreate as any)?.data?.error)
   }, [errorCreate])
   useEffect(() => {
     if (dataInfoUser.user) {
