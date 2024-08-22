@@ -21,7 +21,6 @@ const Header = () => {
   const [notification, setNotification] = useState<any[]>([])
   const { user } = useSelector((state: RootState) => state.persistedReducer.auth)
   const [updateNotification] = useUpdateNotifitoReadByidMutation()
-  console.log(notification,'notification')
   const { register, handleSubmit } = useForm({
     defaultValues: {
       name: ''

@@ -108,7 +108,7 @@ const Checkout = () => {
       const arrTotal: arrTotal[] = []
       const arrTotalNumbers: number[] = []
       dataCartCheckout.items.map((item) =>
-        item.items.map((data) => {
+        item.items.map((data: any) => {
           if (getData == 'list') {
             // eslint-disable-next-line @typescript-eslint/no-unused-vars
             const { total, sale, _id, ...rest } = data
@@ -212,7 +212,6 @@ const Checkout = () => {
             })
             .catch((error: any) => {
               if (error.status == 400 && error.data.error_s == 'blocked') {
-                console.log(error)
                 toast.error('Tài khoản của bạn bị khóa do spam quá nhiều')
                 setTimeout(() => {
                   localStorage.clear()
@@ -228,10 +227,8 @@ const Checkout = () => {
               window.location.href = url
             })
             .catch((err) => {
-              console.log(err, 'errerr')
               toast.error(err.data.message)
               if (err.status == 400 && err.data.error_s == 'blocked') {
-                console.log(err)
                 toast.error('Tài khoản của bạn bị khóa do spam quá nhiều')
                 setTimeout(() => {
                   localStorage.clear()
