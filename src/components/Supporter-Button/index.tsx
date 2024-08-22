@@ -24,7 +24,6 @@ const SupporterBtn = () => {
       const { data } = await axios.get(`http://localhost:8000/get-user-chat-message?senderId=${user._id}`)
       const response = await axios.get('http://localhost:8000/conversations-details/' + data._id)
       setMessages(response.data)
-      console.log(response, 'response')
       setLoading(false)
     } catch (error) {
       console.log(error)
@@ -69,7 +68,6 @@ const SupporterBtn = () => {
     }
     try {
       const { data } = await axios.post('http://localhost:8000/messages-cra', dataMessage)
-      console.log(data, 'data')
       setInputValue('')
       setPreviewImages('')
       handelGetConversation()
@@ -81,7 +79,6 @@ const SupporterBtn = () => {
     console.log('upload')
   }
   const renderMessage = (message: any) => {
-    console.log(message, 'message')
     const isAdmin = message.senderId._id == user._id
     return (
       <li key={message.text} className={`py-4 ${isAdmin ? 'self-end text-right' : 'self-start text-left'}`}>
