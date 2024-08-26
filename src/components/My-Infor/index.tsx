@@ -11,6 +11,7 @@ import { RootState } from '../../store/store'
 import convertToBase64 from '../../utils/convertBase64'
 import { InforForm, InforFormSchema } from '../../validate/Form'
 import { IUserAddress } from '../../interfaces'
+import Autocomplete from '../autocompleteMap/Atutocomplete'
 
 
 // vuanh init
@@ -240,6 +241,7 @@ const MyInfor = () => {
                     <span className='text-red-500'>{errors.address && errors.address.message}</span>
                   </div>
                   <div>
+                    <Autocomplete setValue={setValue} address={defaultAddress} />
                     <div id='map'></div>
                   </div>
                 </div>
