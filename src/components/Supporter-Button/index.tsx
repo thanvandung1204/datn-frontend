@@ -22,8 +22,8 @@ const SupporterBtn = () => {
     try {
       setLoading(true)
       const { data } = await axios.get(`http://localhost:8000/get-user-chat-message?senderId=${user._id}`)
-      const response = await axios.get('http://localhost:8000/conversations-details/' + data._id)
-      setMessages(response.data)
+      // const response = await axios.get('http://localhost:8000/conversations-details/' + data._id)
+      //setMessages(response.data)
       setLoading(false)
     } catch (error) {
       console.log(error)
